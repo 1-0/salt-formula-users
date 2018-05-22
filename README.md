@@ -6,8 +6,8 @@ Formula to set up and configure users for [Ubuntu](https://cloud-images.ubuntu.c
 
 ### minion-ubuntu
 
-For debian like OS
+For Debian like OS
 
 ### minion-centos
 
-For radhat like OS
+For RedHat like OS
