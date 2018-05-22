@@ -14,6 +14,8 @@ For RedHat like OS
 
 ## Usage
 
-Manage user in /test/users folder
+Manage user in /test/users folder by editint centos.sls or ubuntu.sls
+
+Set up user data (home; uid; gid; empty_password; groups; sshkeys)
 
 
