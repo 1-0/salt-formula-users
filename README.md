@@ -11,3 +11,9 @@ For Debian like OS
 ### minion-centos
 
 For RedHat like OS
+
+## Usage
+
+Manage user in /test/users folder
+
+
