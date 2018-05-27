@@ -9,7 +9,8 @@
                 'sudoers',
         ],
         'user_absent': 'redhat',
-        'sshkey_source': r'salt://ubuntu.pem',
+        'ssh_user': 'canonical',
+        'sshkey_sources': [r'salt://ubuntu.pem', ],
     },
     'RedHat': {
         'user_present': 'redhat',
@@ -21,5 +22,6 @@
                 'sudoers',
         ],
         'user_absent': 'canonical',
-        'sshkey_source': r'salt://centos.pem',
-}, merge=salt['pillar.get']('users:lookup')) %}
+        'ssh_user': 'redhat',
+        'sshkey_sources': [r'salt://centos.pem', ],
+}, merge=salt['pillar.get']('users:lookup'), default='Debian') %}

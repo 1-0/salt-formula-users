@@ -33,8 +33,26 @@ git clone https://github.com/1-0/salt-formula-users.git
 service salt-master restart
 ```
 
-Manage user in /test/users folder by editint centos.sls or ubuntu.sls
+### Set up map.jinja
 
-Set up user data (home; uid; gid; empty_password; groups; sshkeys)
+Manage user in `/test/users/pillar/map.jinja`
+
+Set up user data (user_present; user_home; user_uid; user_gid; groups; sshkeys)
+
+### Example user setup in map.jinja
+
+```python
+'user_present': 'redhat',
+'user_home': r'/home/redhat',
+'user_uid': 4000,
+'user_gid': 4000,
+'groups': [
+        'redhat',
+        'sudoers',
+],
+'user_absent': 'canonical',
+'ssh_user': 'redhat',
+'sshkey_sources': [r'salt://centos.pem', ],
+```
 
 
