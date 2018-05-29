@@ -1,4 +1,4 @@
 include:
-{% if pillar.users.users_list is defined %}
+{% if pillar.users.users is defined %}
 - users.users_list
 {% endif %}
