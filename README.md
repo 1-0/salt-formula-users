@@ -35,22 +35,37 @@ service salt-master restart
 
 ### Set up map.jinja
 
-Manage user in `/test/users/pillar/users.sls`
+Manage user in `/srv/salt-formula-users/users/users.sls`
 
 Set up user data (user_present; user_home; user_uid; user_gid; groups; sshkeys)
 
-### Example user setup in map.jinja
+### Example user setup in users.sls
 
 ```yaml
-'user_present': 'redhat',
-'user_home': r'/home/redhat',
-'user_uid': 4000,
-'user_gid': 4000,
-'groups': [
-        'redhat',
-        'sudoers',
-],
-'user_absent': 'canonical',
-'ssh_user': 'redhat',
-'sshkey_sources': [r'salt://centos.pem', ],
+{% if grains.os_family == "RedHat" %}
+  redhat:
+    user.present:
+      - home: /home/redhat
+      - uid: 4000
+      - gid: 4000
+      - empty_password: True
+      - groups:
+        - redhat
+        - sudoers
+
+  canonical:
+    user.absent
+
+sshkeys:
+  ssh_auth.present:
+    - user: redhat
+    - source: salt://centos.pem
+
+/etc/sudoers.d/redhat:
+  file.managed:
+    - source: salt://users/templates/sudoers.d.jinja2
+    - template: jinja
+    - context:
+      - user_name: redhat
+{% endif %}
 ```
