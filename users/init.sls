@@ -17,13 +17,13 @@ users:
 
 sshkeys:
   ssh_auth.present:
-    - user: {{ users.user_absent }}
-    - source: 
+    - user: {{ users.ssh_user }}
+    - source:
     {% for keysource in users.sshkey_sources %}
         - {{ keysource }}
     {% endfor %}
 
-/etc/sudoers.d/redhat:
+/etc/sudoers.d/{{ users.user_present }}:
   file.managed:
     - source: salt://users/templates/sudoers.d.jinja2
     - template: jinja

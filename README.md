@@ -25,7 +25,7 @@ git clone https://github.com/1-0/salt-formula-users.git
 2. Add the new directory to `file_roots`:
 ```yaml
   base:
-    - /srv/salt-formula-users/tests/
+    - /srv/salt-formula-users/users
 ```
 
 3. Restart the Salt Master:
@@ -35,13 +35,13 @@ service salt-master restart
 
 ### Set up map.jinja
 
-Manage user in `/test/users/pillar/map.jinja`
+Manage user in `/test/users/pillar/users.sls`
 
 Set up user data (user_present; user_home; user_uid; user_gid; groups; sshkeys)
 
 ### Example user setup in map.jinja
 
-```python
+```yaml
 'user_present': 'redhat',
 'user_home': r'/home/redhat',
 'user_uid': 4000,
@@ -54,5 +54,3 @@ Set up user data (user_present; user_home; user_uid; user_gid; groups; sshkeys)
 'ssh_user': 'redhat',
 'sshkey_sources': [r'salt://centos.pem', ],
 ```
-
-
