@@ -3,6 +3,7 @@
 users:
 
 {% if grains.os_family == "RedHat" %}
+
   redhat:
     user.present:
       - home: /home/redhat
