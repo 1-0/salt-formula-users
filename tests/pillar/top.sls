@@ -1,18 +1,12 @@
 base:
 
-  sudo:
-    pkg.installed:
-      - name: sudo
-
-#  'G@os:Debian':
-  'G@os_family:Debian or minion-ubuntu':
+  'G@os_family:Debian':
     include:
-      - users.ubuntu
-
-#  'G@os:RedHat':
-  'G@os_family:RedHat or minion-centos':
+      - pillar.users.ubuntu
+  
+  'G@os_family:RedHat':
     include:
-      - users.centos
+      - pillar.users.centos
 
 
 
