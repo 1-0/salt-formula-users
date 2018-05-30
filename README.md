@@ -69,3 +69,9 @@ sshkeys:
       - user_name: redhat
 {% endif %}
 ```
+
+### Run test for recipies
+
+Execute `tests/run_tests.sh` to run test for recipies
+
+
