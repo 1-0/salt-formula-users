@@ -24,4 +24,4 @@
         'user_absent': 'canonical',
         'ssh_user': 'redhat',
         'sshkey_sources': [r'salt://centos.pem', ],
-}, merge=salt['pillar.get']('users:lookup'), default='Debian') %}
+}, merge=salt['pillar.get']('users:users')) %}
