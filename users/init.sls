@@ -1,25 +1,25 @@
 {% from "pillar/map.jinja" import users with context %}
 
 users:
-  {{ users.user_present }}:
+  {{ users.name }}:
     user.present:
-      - home: {{ users.user_home }}
-      - uid: {{ users.user_uid }}
-      - gid: {{ users.user_gid }}
+      - home: {{ users.home }}
+      - uid: {{ users.uid }}
+      - gid: {{ users.gid }}
       - empty_password: True
       - groups:
       {% for groupname in users.groups %}
         - {{ groupname }}
       {% endfor %}
 
-  {{ users.user_absent }}:
+  {{ users.absent }}:
     user.absent
 
 sshkeys:
   ssh_auth.present:
-    - user: {{ users.user_absent }}
+    - user: {{ users.user }}
     - source: 
-    {% for keysource in users.sshkey_sources %}
+    {% for keysource in users.sources %}
         - {{ keysource }}
     {% endfor %}
 
@@ -28,5 +28,5 @@ sshkeys:
     - source: salt://users/templates/sudoers.d.jinja2
     - template: jinja
     - context:
-      - user_name: {{ users.user_present }}
+      - user_name: {{ users.name }}
 

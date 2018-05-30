@@ -33,41 +33,30 @@ git clone https://github.com/1-0/salt-formula-users.git
 service salt-master restart
 ```
 
-### Set up map.jinja
+### Set up tests
 
-Manage user in `/srv/salt-formula-users/users/users.sls`
+Manage user in `/srv/salt-formula-users/tests/pillar/users/`
 
-Set up user data (user_present; user_home; user_uid; user_gid; groups; sshkeys)
+Set up user data (user; home; uid; gid; groups; sshkeys)
 
-### Example user setup in users.sls
+### Example user setup in users/canonical.sls
 
 ```yaml
-{% if grains.os_family == "RedHat" %}
-  redhat:
-    user.present:
-      - home: /home/redhat
-      - uid: 4000
-      - gid: 4000
-      - empty_password: True
-      - groups:
-        - redhat
-        - sudoers
-
-  canonical:
-    user.absent
-
-sshkeys:
-  ssh_auth.present:
-    - user: redhat
-    - source: salt://centos.pem
-
-/etc/sudoers.d/redhat:
-  file.managed:
-    - source: salt://users/templates/sudoers.d.jinja2
-    - template: jinja
-    - context:
-      - user_name: redhat
-{% endif %}
+users:
+  -name: canonical
+  - home: /home/canonical
+  - uid: 4000
+  - gid: 4000
+  - groups:
+    - canonical
+    - sudoers
+    
+  - absent: redhat
+    
+# sshkeys
+  - user: canonical
+  - sources:
+    - salt://ubuntu.pem
 ```
 
 ### Run test for recipies
